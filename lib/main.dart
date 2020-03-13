@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:io';
 
 void main() => runApp(MyApp());
 
@@ -27,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  MethodChannel methodChannel = MethodChannel("com.example.notification");
+  MethodChannel methodChannel = MethodChannel("music");
 
   bool isServiceRunning;
 
@@ -38,20 +37,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void startService() async {
-    if (Platform.isAndroid) {
-      String data = await methodChannel.invokeMethod("startMusic");
-      print(data);
-    }
+    String data = await methodChannel.invokeMethod("startMusic");
+    print(data);
     setState(() {
       isServiceRunning = true;
     });
   }
 
   void stopService() async {
-    if (Platform.isAndroid) {
-      String data = await methodChannel.invokeMethod("stopMusic");
-      print(data);
-    }
+    String data = await methodChannel.invokeMethod("stopMusic");
+    print(data);
     setState(() {
       isServiceRunning = false;
     });

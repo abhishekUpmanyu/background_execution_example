@@ -19,7 +19,7 @@ class MainActivity: FlutterActivity() {
         super.onCreate(savedInstanceState)
         forService = Intent(this, MyService::class.java)
 
-        MethodChannel(flutterEngine?.dartExecutor?.binaryMessenger, "com.example.notification")
+        MethodChannel(flutterEngine?.dartExecutor?.binaryMessenger, "music")
                 .setMethodCallHandler { call, result ->
                     if (call.method == "startMusic") {
                         startMusicService()
