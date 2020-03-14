@@ -37,18 +37,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void startService() async {
-    String data = await methodChannel.invokeMethod("startMusic");
-    print(data);
+    bool data = await methodChannel.invokeMethod("startMusic");
     setState(() {
-      isServiceRunning = true;
+      isServiceRunning = data;
     });
   }
 
   void stopService() async {
-    String data = await methodChannel.invokeMethod("stopMusic");
-    print(data);
+    bool data = await methodChannel.invokeMethod("stopMusic");
     setState(() {
-      isServiceRunning = false;
+      isServiceRunning = data;
     });
   }
 

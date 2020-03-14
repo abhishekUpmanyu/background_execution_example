@@ -13,7 +13,7 @@ import io.flutter.plugins.GeneratedPluginRegistrant
 
 class MainActivity: FlutterActivity() {
 
-    lateinit var forService: Intent
+    private lateinit var forService: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,15 +21,17 @@ class MainActivity: FlutterActivity() {
 
         MethodChannel(flutterEngine?.dartExecutor?.binaryMessenger, "music")
                 .setMethodCallHandler { call, result ->
-                    if (call.method == "startMusic") {
-                        startMusicService()
-                        result.success("Music Service Started")
-                    } else if (call.method == "stopMusic") {
-                        if (isServiceRunning()) {
-                            print(isServiceRunning())
-                            stopService(forService)
+                    when (call.method) {
+                        "startMusic" -> {
+                            startMusicService()
+                            result.success(isServiceRunning())
                         }
-                        result.success("Music Service Stopped")
+                        "stopMusic" -> {
+                            if (isServiceRunning()) {
+                                stopService(forService)
+                            }
+                            result.success(isServiceRunning())
+                        }
                     }
                 }
     }

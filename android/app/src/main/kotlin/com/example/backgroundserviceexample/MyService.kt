@@ -30,7 +30,7 @@ class MyService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI)
+        player = MediaPlayer.create(this, R.raw.sample)
         player.isLooping = true
         player.start()
         return START_STICKY
