@@ -21,6 +21,8 @@ import AVFoundation
             print(error)
         }
         
+        audioPlayer.numberOfLoops = -1
+        
         let controller = window?.rootViewController as! FlutterViewController
 
         let channel = FlutterMethodChannel(name:"music", binaryMessenger:controller.binaryMessenger)
@@ -45,6 +47,7 @@ import AVFoundation
     
     private func startMusic(result: FlutterResult) {
         audioPlayer.play()
+        result(true)
     }
     
     private func stopMusic(result: FlutterResult) {
@@ -52,5 +55,6 @@ import AVFoundation
             audioPlayer.stop()
             audioPlayer.currentTime = 0
         }
+        result(false)
     }
 }
