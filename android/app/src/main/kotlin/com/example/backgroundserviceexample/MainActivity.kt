@@ -13,12 +13,15 @@ import io.flutter.plugins.GeneratedPluginRegistrant
 
 class MainActivity: FlutterActivity() {
 
+    // Creating a service intent
     private lateinit var forService: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Initalizing the service intent
         forService = Intent(this, MyService::class.java)
 
+        // Method Channel implementation
         MethodChannel(flutterEngine?.dartExecutor?.binaryMessenger, "music")
                 .setMethodCallHandler { call, result ->
                     when (call.method) {
@@ -40,6 +43,7 @@ class MainActivity: FlutterActivity() {
         GeneratedPluginRegistrant.registerWith(flutterEngine)
     }
 
+    // Starts music service
     fun startMusicService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(forService)
@@ -48,6 +52,7 @@ class MainActivity: FlutterActivity() {
         }
     }
 
+    // Checks whether the music service is running
     fun isServiceRunning(): Boolean {
         val manager: ActivityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         for (service in manager.getRunningServices(Int.MAX_VALUE)) {

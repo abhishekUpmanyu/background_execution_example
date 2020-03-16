@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,8 +25,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // Declaration of method channel for communication between flutter code and
+  // native code
   MethodChannel methodChannel = MethodChannel("music");
 
+  // Variable used to setState of the Play/Stop button according to the running
+  // status of the music service
   bool isServiceRunning;
 
   @override
@@ -36,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
+  //Using method channel to invoke native code to play music
   void startService() async {
     bool data = await methodChannel.invokeMethod("startMusic");
     setState(() {
@@ -43,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  //Using method channel to invoke native code to stop music
   void stopService() async {
     bool data = await methodChannel.invokeMethod("stopMusic");
     setState(() {
