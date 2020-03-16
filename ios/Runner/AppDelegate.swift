@@ -18,6 +18,20 @@ import AVFoundation
             audioPlayer = try AVAudioPlayer(contentsOf:
                 URL.init(fileURLWithPath: Bundle.main.path(forResource: "sample", ofType: "mp3")!))
             audioPlayer.prepareToPlay()
+            
+            // Defining audio session for background playback
+            let audioSession = AVAudioSession.sharedInstance()
+            
+            do {
+                if #available(iOS 10.0, *) {
+                    try audioSession.setCategory(AVAudioSessionCategoryPlayback, mode: AVAudioSessionModeDefault, options:[])
+                } else {
+                    try audioSession.setCategory(AVAudioSessionCategoryPlayback, with:[])
+                }
+            }
+            catch {
+                print(error)
+            }
         }
         catch {
             print(error)
