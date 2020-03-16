@@ -8,7 +8,7 @@ The app uses method channels to call functions written in native code; Kotlin fo
 
 Method channel implementation in Flutter:
 
-'''dart
+```dart
 // Declaration of method channel for communication between flutter code and
 // native code
 MethodChannel methodChannel = MethodChannel("music");
@@ -38,10 +38,11 @@ void stopService() async {
       isServiceRunning = data;
     });
 }
-'''
+```
 
 Android:
-'''kotlin
+
+```kotlin
 class MainActivity: FlutterActivity() {
 
     // Creating a service intent
@@ -95,10 +96,11 @@ class MainActivity: FlutterActivity() {
         return false
     }
 }
-'''
+```
 
 iOS:
-'''swift
+
+```swift
 @objc class AppDelegate: FlutterAppDelegate {
 
     // Declaring audio player
@@ -161,10 +163,13 @@ iOS:
         result(false)
     }
 }
-'''
+```
 
 ## Screenshots
 
 ![Android](screenshots/ss_android.png)
+*Android*
+
 
 ![iOS](screenshots/ss_ios.PNG)
+*iOS*
